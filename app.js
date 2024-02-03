@@ -10,7 +10,16 @@ manipularTextos('p', 'Escolha um número entre 1 e 10')
 
 function verificarChute() {
     let chute = document.querySelector('.container__input').value;
-    console.log(chute == numeroSecreto);
+    if (chute == numeroSecreto) {
+        manipularTextos('h1', 'Você acertou')
+        manipularTextos('p', 'Parabéns')
+    }else {
+        if (chute > numeroSecreto) {
+            manipularTextos('p', 'O número secreto é menor que o chute')
+        }else{
+            manipularTextos('p', 'O numero secreto é maior que o chute')
+        }
+    }
     console.log(numeroSecreto);
 }
 
