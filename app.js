@@ -9,6 +9,8 @@ manipularTextos('h1', 'Jogo da adivinhação');
 manipularTextos('p', 'Escolha um número entre 1 e 10')
 
 function verificarChute() {
+    let chute = document.querySelector('.container__input').value;
+    console.log(chute == numeroSecreto);
     console.log(numeroSecreto);
 }
 
