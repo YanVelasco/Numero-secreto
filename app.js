@@ -1,28 +1,49 @@
 let numeroSecreto = gerarNumeroAleatorio();
+let tentativa = 1;
 
 function manipularTextos(tag, texto) {
-    let campo = document.querySelector(tag);
-    campo.innerHTML = texto;
+  let campo = document.querySelector(tag);
+  campo.innerHTML = texto;
 }
 
-manipularTextos('h1', 'Jogo da adivinhação');
-manipularTextos('p', 'Escolha um número entre 1 e 10')
+function mesagenmInicial() {
+  manipularTextos("h1", "Jogo da adivinhação");
+  manipularTextos("p", "Escolha um número entre 1 e 10");
+}
+
+mesagenmInicial();
 
 function verificarChute() {
-    let chute = document.querySelector('.container__input').value;
-    if (chute == numeroSecreto) {
-        manipularTextos('h1', 'Você acertou')
-        manipularTextos('p', 'Parabéns')
-    }else {
-        if (chute > numeroSecreto) {
-            manipularTextos('p', 'O número secreto é menor que o chute')
-        }else{
-            manipularTextos('p', 'O numero secreto é maior que o chute')
-        }
+  let chute = document.querySelector(".container__input").value;
+
+  if (chute == numeroSecreto) {
+    let palavraTentativas = tentativa > 1 ? "tentativas" : "tentativa";
+    manipularTextos("h1", `Você acertou em ${tentativa} ${palavraTentativas}`);
+    manipularTextos("p", "Parabéns");
+    document.querySelector("#reiniciar").removeAttribute("disabled");
+  } else {
+    if (chute > numeroSecreto) {
+      manipularTextos("p", "O número secreto é menor que o chute");
+    } else {
+      manipularTextos("p", "O numero secreto é maior que o chute");
     }
-    console.log(numeroSecreto);
+    tentativa++;
+  }
+  limparCampo();
+  console.log(numeroSecreto);
 }
 
 function gerarNumeroAleatorio() {
-    return parseInt(Math.random() * 10 + 1);
+  return parseInt(Math.random() * 10 + 1);
+}
+
+function limparCampo() {
+  document.querySelector(".container__input").value = "";
+}
+
+function reiniciarJogo() {
+  numeroSecreto = gerarNumeroAleatorio();
+  limparCampo();
+  tentativa = 1;
+  mesagenmInicial();
 }
