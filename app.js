@@ -1,8 +1,9 @@
+let numeroEscolhido = [];
 let numeroSecreto = gerarNumeroAleatorio();
 let tentativa = 1;
 
 function manipularTextos(tag, texto) {
-   let campo = document.querySelector(tag);
+  let campo = document.querySelector(tag);
   campo.innerHTML = texto;
 }
 
@@ -21,7 +22,7 @@ function verificarChute() {
     manipularTextos("h1", `Você acertou em ${tentativa} ${palavraTentativas}`);
     manipularTextos("p", "Parabéns");
     document.querySelector("#reiniciar").removeAttribute("disabled");
-    document.querySelector("#chutar").disabled=true;
+    document.querySelector("#chutar").disabled = true;
   } else {
     if (chute > numeroSecreto) {
       manipularTextos("p", "O número secreto é menor que o chute");
@@ -31,11 +32,22 @@ function verificarChute() {
     tentativa++;
   }
   limparCampo();
-  console.log(numeroSecreto);
 }
 
 function gerarNumeroAleatorio() {
-  return parseInt(Math.random() * 10 + 1);
+  let numero = parseInt(Math.random() * 10 + 1);
+
+  if (numeroEscolhido.length === 10) {
+    numeroEscolhido.splice(0, numeroEscolhido.length);
+  }
+
+  while (numeroEscolhido.includes(numero)) {
+    numero = parseInt(Math.random() * 3 + 1);
+  }
+
+  numeroEscolhido.push(numero);
+  console.log(numeroEscolhido);
+  return numero;
 }
 
 function limparCampo() {
@@ -48,5 +60,5 @@ function reiniciarJogo() {
   tentativa = 1;
   mesagenmInicial();
   document.querySelector("#reiniciar").disabled = true;
-  document.querySelector("#chutar").disabled=false;
+  document.querySelector("#chutar").disabled = false;
 }
