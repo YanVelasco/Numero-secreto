@@ -2,7 +2,7 @@ let numeroSecreto = gerarNumeroAleatorio();
 let tentativa = 1;
 
 function manipularTextos(tag, texto) {
-  let campo = document.querySelector(tag);
+   let campo = document.querySelector(tag);
   campo.innerHTML = texto;
 }
 
@@ -21,6 +21,7 @@ function verificarChute() {
     manipularTextos("h1", `Você acertou em ${tentativa} ${palavraTentativas}`);
     manipularTextos("p", "Parabéns");
     document.querySelector("#reiniciar").removeAttribute("disabled");
+    document.querySelector("#chutar").disabled=true;
   } else {
     if (chute > numeroSecreto) {
       manipularTextos("p", "O número secreto é menor que o chute");
@@ -46,4 +47,6 @@ function reiniciarJogo() {
   limparCampo();
   tentativa = 1;
   mesagenmInicial();
+  document.querySelector("#reiniciar").disabled = true;
+  document.querySelector("#chutar").disabled=false;
 }
